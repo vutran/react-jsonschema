@@ -1,0 +1,19 @@
+{
+  "firstName": "Vu",
+  "lastName": "Tran",
+  "age": 28,
+  "websites": [
+    "https://github.com/vutran/",
+    "https://twitter.com/tranvu/"
+  ],
+  "projects": [
+    {
+      "name": "react-offcanvas",
+      "url": "https://github.com/vutran/react-offcanvas"
+    },
+    {
+      "name": "jsx-hyperscript",
+      "url": "https://github.com/vutran/jsx-hyperscript"
+    }
+  ]
+}

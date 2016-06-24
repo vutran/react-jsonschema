@@ -1,0 +1,69 @@
+{
+  "name": "react-jsonschema",
+  "version": "0.1.0",
+  "description": "React forms with JSONSchema",
+  "main": "src/index.js",
+  "author": {
+    "name": "Vu Tran",
+    "email": "vu@vu-tran.com",
+    "website": "http://vu-tran.com/"
+  },
+  "bugs": {
+    "web": "https://github.com/vutran/react-jsonschema/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:vutran/react-jsonschema.git"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/vutran/react-jsonschema",
+  "devDependencies": {
+    "ava": "^0.15.2",
+    "babel-cli": "^6.10.1",
+    "babel-core": "^6.9.1",
+    "babel-eslint": "^6.0.4",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "eslint": "^2.13.1",
+    "eslint-config-airbnb": "^9.0.1",
+    "eslint-plugin-import": "^1.9.2",
+    "eslint-plugin-jsx-a11y": "^1.5.3",
+    "eslint-plugin-react": "^5.2.2",
+    "json-loader": "^0.5.4",
+    "nyc": "^6.6.1",
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0",
+    "rimraf": "^2.5.2",
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.14.1"
+  },
+  "scripts": {
+    "clean": "rimraf lib",
+    "lint": "eslint ./src",
+    "compile": "babel ./src -d ./lib",
+    "build": "npm run clean && npm run compile",
+    "dev": "webpack-dev-server --content-base examples/ --config examples/webpack.config.js --inline --hot",
+    "prepublish": "npm run build",
+    "test": "nyc ava"
+  },
+  "dependencies": {
+    "lodash": "^4.13.1"
+  },
+  "ava": {
+    "files": [
+      "test/**/*.js"
+    ],
+    "source": [
+      "**/*.js",
+      "!lib/**/*"
+    ],
+    "require": [
+      "babel-register"
+    ],
+    "concurrency": 5,
+    "failFast": true,
+    "babel": "inherit"
+  }
+}

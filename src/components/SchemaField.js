@@ -1,15 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import Field from './Field';
 import AddButton from './AddButton';
+import { addEmptyValue } from '../utils';
 import types from '../constants/types';
 
 class SchemaField extends Component {
-  handleClick(e) {
-    console.log('HANDLE CLICK ADD');
-  }
-
   getFields(propId, schema, formData) {
-    const { onChange } = this.props;
+    const { onChange, onAddItem } = this.props;
     // set the prop id prefix to keep track of it's path
     const propIdPrefix = propId || 'formData';
     // Recursively generate child SchemaField for each property
@@ -24,6 +21,7 @@ class SchemaField extends Component {
             schema={childSchema}
             formData={childFormData}
             onChange={onChange}
+            onAddItem={onAddItem}
           />
         );
       });
@@ -35,6 +33,7 @@ class SchemaField extends Component {
           schema={schema.items}
           formData={f}
           onChange={onChange}
+          onAddItem={onAddItem}
         />
       ));
     }
@@ -50,12 +49,23 @@ class SchemaField extends Component {
 
   getButtons(schema) {
     if (schema.type === types.ARRAY) {
-      return (
-        <AddButton
-          onClick={::this.handleClick}
-        />
-      );
+      return <AddButton onClick={::this.handleAddItem} />;
     }
+    return null;
+  }
+
+  /**
+   * Creates a new empty value based on the given schema and
+   * pushes an event up the component tree
+   */
+  handleAddItem() {
+    const { propId, schema, formData } = this.props;
+    const value = addEmptyValue(schema, formData);
+    this.props.onAddItem({
+      propId,
+      schema,
+      value,
+    });
   }
 
   render() {
@@ -81,6 +91,7 @@ SchemaField.propTypes = {
     PropTypes.bool,
   ]),
   onChange: PropTypes.func, // { propId, schema, value }
+  onAddItem: PropTypes.func, // { propId, schema, value }
 };
 
 export default SchemaField;

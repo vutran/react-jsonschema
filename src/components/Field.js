@@ -1,11 +1,13 @@
+
 import React, { Component, PropTypes } from 'react';
 import { getInputType } from '../utils';
 
 class Field extends Component {
   handleChange(e) {
+    const { schema, propId } = this.props;
     this.props.onChange({
-      schema: this.props.schema,
-      propId: this.props.propId,
+      schema,
+      propId,
       value: e.target.value,
     });
   }

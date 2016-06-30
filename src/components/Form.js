@@ -20,13 +20,12 @@ class Form extends Component {
   /**
    * Adds a new item
    *
-   * @param object item
+   * @param object e
    */
-  handleAddItem(item) {
-    console.log('ADD:', item);
-    // const newState = extend({}, this.state);
-    // set(newState, `formData.`);
-    // console.log('ADD:', item);
+  handleAddItem(e) {
+    const newState = extend({}, this.state);
+    set(newState, e.propId, e.value);
+    this.setState(newState);
   }
 
   /**

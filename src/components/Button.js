@@ -5,7 +5,7 @@ const Button = ({ type, children, onClick }) => (
 );
 
 Button.propTypes = {
-  type: PropTypes.oneOfType(['button', 'submit']),
+  type: PropTypes.oneOf(['button', 'submit']),
   children: PropTypes.any,
   onClick: PropTypes.func,
 };

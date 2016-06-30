@@ -1,6 +1,9 @@
 import test from 'ava';
 import types from '../src/constants/types';
-import { getDefaultState } from '../src/utils';
+import {
+  getDefaultState,
+  addEmptyValue,
+} from '../src/utils';
 
 test('retrieve the default state for an object', t => {
   const schema = {
@@ -160,4 +163,71 @@ test('retrieve the default state for a complex object with populated data', t =>
     ],
   };
   t.deepEqual(getDefaultState(schema, data), data);
+});
+
+test('adds a new empty value to a simple array', t => {
+  const schema = {
+    title: 'Array',
+    type: types.ARRAY,
+    items: {
+      title: 'String',
+      type: types.STRING,
+    },
+  };
+  const data = [
+    'https://twitter.com/tranvu/',
+    'https://github.com/vutran/',
+  ];
+  const expected = [
+    'https://twitter.com/tranvu/',
+    'https://github.com/vutran/',
+    '',
+  ];
+  t.deepEqual(addEmptyValue(schema, data), expected);
+});
+
+test('adds a new empty value to a complex array', t => {
+  const schema = {
+    title: 'Array',
+    type: types.ARRAY,
+    items: {
+      title: 'Person',
+      type: types.OBJECT,
+      properties: {
+        firstName: {
+          title: 'First Name',
+          type: types.STRING,
+        },
+        lastName: {
+          title: 'Last Name',
+          type: types.STRING,
+        },
+      },
+    },
+  };
+  const data = [
+    {
+      firstName: 'Vu',
+      lastName: 'Tran',
+    },
+  ];
+  const expected = [
+    {
+      firstName: 'Vu',
+      lastName: 'Tran',
+    },
+    {
+      firstName: '',
+      lastName: '',
+    },
+  ];
+  t.deepEqual(addEmptyValue(schema, data), expected);
+});
+
+test('deletes an existing value from a simple array', t => {
+  t.fail();
+});
+
+test('deletes an existing value from a complex array', t => {
+  t.fail();
 });

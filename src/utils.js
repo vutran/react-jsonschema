@@ -3,8 +3,8 @@ import types from './constants/types';
 /**
  * Retrieve the input element type based on the schema type
  *
- * @param object schema
- * @return string
+ * @param {Object} schema
+ * @return {String}
  */
 export function getInputType(schema) {
   let inputType = 'text';
@@ -33,9 +33,9 @@ export function getInputType(schema) {
  * If the formData is specified, it will be matched against the schema
  * and returned
  *
- * @param object schema
- * @param object formData
- * @return object
+ * @param {Object} schema
+ * @param {Object} formData
+ * @return {Object}
  */
 export function getDefaultState(schema, formData) {
   switch (schema.type) {

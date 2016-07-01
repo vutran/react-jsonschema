@@ -64,7 +64,7 @@ class Form extends Component {
   /**
    * Checks required fields and executes the onSubmit callback function
    *
-   * @param Event e
+   * @param {Event} e
    */
   handleSubmit(e) {
     e.preventDefault();

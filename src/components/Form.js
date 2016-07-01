@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import SubmitButton from './SubmitButton';
 import SchemaField from './SchemaField';
-import { extend, set } from 'lodash';
+import { cloneDeep, set } from 'lodash';
 import { getDefaultState } from '../utils';
-import { deleteIndexFromState } from '../reducers';
+import { addValueToState, deleteIndexFromState } from '../reducers';
 
 class Form extends Component {
   constructor(props) {
@@ -21,35 +21,42 @@ class Form extends Component {
   /**
    * Adds a new item
    *
-   * @param object e
+   * @param {Object} e
+   * @param {String} e.path
+   * @param {Object} e.schema
    */
   handleAddItem(e) {
-    const newState = extend({}, this.state);
-    set(newState, e.propId, e.value);
+    const newState = addValueToState(this.state, {
+      path: e.path,
+      schema: e.schema,
+    });
     this.setState(newState);
   }
 
   /**
    * Deletes an existing item
    *
-   * @param object e
+   * @param {Object} e
+   * @param {Number} e.index
+   * @param {String} e.path
    */
   handleDeleteItem(e) {
-    const payload = {
-      index: e.propIndex,
-      path: e.propId,
-    };
-    const newState = deleteIndexFromState(this.state, payload);
+    const newState = deleteIndexFromState(this.state, {
+      index: e.index,
+      path: e.path,
+    });
     this.setState(newState);
   }
 
   /**
    * Handles a field change
    *
-   * @param object e
+   * @param {Object} e
+   * @param {String} e.propId
+   * @param {String|Number|Boolean} e.value
    */
   handleFieldChange(e) {
-    const newState = extend({}, this.state);
+    const newState = cloneDeep(this.state);
     set(newState, e.propId, e.value);
     this.setState(newState);
   }

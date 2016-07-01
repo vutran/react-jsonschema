@@ -2,10 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import Field from './Field';
 import AddButton from './AddButton';
 import DeleteButton from './DeleteButton';
-import {
-  addEmptyValue,
-  removeExistingValue,
-} from '../utils';
 import types from '../constants/types';
 
 class SchemaField extends Component {
@@ -38,9 +34,8 @@ class SchemaField extends Component {
          */
         const handleDeleteItem = () => {
           this.props.onDeleteItem({
-            propIndex: i,
-            propId: propIdPrefix,
-            schema,
+            index: i,
+            path: propIdPrefix,
           });
         };
         return (
@@ -77,16 +72,14 @@ class SchemaField extends Component {
   }
 
   /**
-   * Creates a new empty value based on the given schema and
-   * pushes an event up the component tree
+   * Creates a new empty value based on the current schema,
+   * and the current formData.
    */
   handleAddItem() {
-    const { propId, schema, formData } = this.props;
-    const value = addEmptyValue(schema, formData);
+    const { propId, schema } = this.props;
     this.props.onAddItem({
-      propId,
+      path: propId,
       schema,
-      value,
     });
   }
 
@@ -113,8 +106,8 @@ SchemaField.propTypes = {
     PropTypes.bool,
   ]),
   onChange: PropTypes.func, // { propId, schema, value }
-  onAddItem: PropTypes.func, // { propId, schema, value }
-  onDeleteItem: PropTypes.func, // { propIndex, propId, schema, value }
+  onAddItem: PropTypes.func, // { path, schema }
+  onDeleteItem: PropTypes.func, // { index, path }
 };
 
 export default SchemaField;

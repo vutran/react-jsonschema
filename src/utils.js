@@ -1,4 +1,3 @@
-import { cloneDeep } from 'lodash';
 import types from './constants/types';
 
 /**
@@ -64,24 +63,4 @@ export function getDefaultState(schema, formData) {
     default:
       return formData || schema.default || null;
   }
-}
-
-/**
- * Given a schema, adds a new value based on its type
- * and returns the new formData
- *
- * @param object schema
- * @param object formData
- * @return object
- */
-export function addEmptyValue(schema, formData) {
-  const newFormData = cloneDeep(formData);
-  switch (schema.type) {
-    case types.ARRAY:
-      newFormData.push(getDefaultState(schema.items));
-      break;
-    default:
-      // do nothing
-  }
-  return newFormData;
 }

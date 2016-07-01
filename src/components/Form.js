@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import SubmitButton from './SubmitButton';
 import SchemaField from './SchemaField';
-import { extend, set, result } from 'lodash';
+import { extend, set } from 'lodash';
 import { getDefaultState } from '../utils';
+import { deleteIndexFromState } from '../reducers';
 
 class Form extends Component {
   constructor(props) {
@@ -34,13 +35,11 @@ class Form extends Component {
    * @param object e
    */
   handleDeleteItem(e) {
-    const newState = extend({}, this.state);
-    const values = result(newState, e.propId);
-    const newArray = [
-      ...values.slice(0, e.propIndex),
-      ...values.slice(e.propIndex + 1),
-    ];
-    set(newState, e.propId, newArray);
+    const payload = {
+      index: e.propIndex,
+      path: e.propId,
+    };
+    const newState = deleteIndexFromState(this.state, payload);
     this.setState(newState);
   }
 

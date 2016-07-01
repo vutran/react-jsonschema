@@ -223,11 +223,3 @@ test('adds a new empty value to a complex array', t => {
   ];
   t.deepEqual(addEmptyValue(schema, data), expected);
 });
-
-test('deletes an existing value from a simple array', t => {
-  t.fail();
-});
-
-test('deletes an existing value from a complex array', t => {
-  t.fail();
-});

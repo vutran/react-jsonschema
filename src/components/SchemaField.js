@@ -1,12 +1,16 @@
 import React, { Component, PropTypes } from 'react';
 import Field from './Field';
 import AddButton from './AddButton';
-import { addEmptyValue } from '../utils';
+import DeleteButton from './DeleteButton';
+import {
+  addEmptyValue,
+  removeExistingValue,
+} from '../utils';
 import types from '../constants/types';
 
 class SchemaField extends Component {
   getFields(propId, schema, formData) {
-    const { onChange, onAddItem } = this.props;
+    const { onChange, onAddItem, onDeleteItem } = this.props;
     // set the prop id prefix to keep track of it's path
     const propIdPrefix = propId || 'formData';
     // Recursively generate child SchemaField for each property
@@ -22,20 +26,38 @@ class SchemaField extends Component {
             formData={childFormData}
             onChange={onChange}
             onAddItem={onAddItem}
+            onDeleteItem={onDeleteItem}
           />
         );
       });
     } else if (schema.type === types.ARRAY) {
-      return formData.map((f, i) => (
-        <SchemaField
-          key={i}
-          propId={`${propIdPrefix}[${i}]`}
-          schema={schema.items}
-          formData={f}
-          onChange={onChange}
-          onAddItem={onAddItem}
-        />
-      ));
+      return formData.map((f, i) => {
+        /**
+         * Deletes the existing item based on the given schema and
+         * pushes an event up the component tree
+         */
+        const handleDeleteItem = () => {
+          this.props.onDeleteItem({
+            propIndex: i,
+            propId: propIdPrefix,
+            schema,
+          });
+        };
+        return (
+          <div key={i}>
+            <SchemaField
+              key={i}
+              propId={`${propIdPrefix}[${i}]`}
+              schema={schema.items}
+              formData={f}
+              onChange={onChange}
+              onAddItem={onAddItem}
+              onDeleteItem={onDeleteItem}
+            />
+            <DeleteButton onClick={handleDeleteItem} />
+          </div>
+        );
+      });
     }
     return (
       <Field
@@ -92,6 +114,7 @@ SchemaField.propTypes = {
   ]),
   onChange: PropTypes.func, // { propId, schema, value }
   onAddItem: PropTypes.func, // { propId, schema, value }
+  onDeleteItem: PropTypes.func, // { propIndex, propId, schema, value }
 };
 
 export default SchemaField;

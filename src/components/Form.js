@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import SubmitButton from './SubmitButton';
 import SchemaField from './SchemaField';
-import { extend, set } from 'lodash';
+import { extend, set, result } from 'lodash';
 import { getDefaultState } from '../utils';
 
 class Form extends Component {
@@ -25,6 +25,22 @@ class Form extends Component {
   handleAddItem(e) {
     const newState = extend({}, this.state);
     set(newState, e.propId, e.value);
+    this.setState(newState);
+  }
+
+  /**
+   * Deletes an existing item
+   *
+   * @param object e
+   */
+  handleDeleteItem(e) {
+    const newState = extend({}, this.state);
+    const values = result(newState, e.propId);
+    const newArray = [
+      ...values.slice(0, e.propIndex),
+      ...values.slice(e.propIndex + 1),
+    ];
+    set(newState, e.propId, newArray);
     this.setState(newState);
   }
 
@@ -78,6 +94,7 @@ class Form extends Component {
           formData={formData}
           onChange={::this.handleFieldChange}
           onAddItem={::this.handleAddItem}
+          onDeleteItem={::this.handleDeleteItem}
         />
         <SubmitButton>Submit</SubmitButton>
       </form>

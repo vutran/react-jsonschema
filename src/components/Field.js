@@ -19,7 +19,7 @@ class Field extends Component {
         <label>{schema.title}</label>
         <input
           type={getInputType(schema, formData)}
-          defaultValue={formData}
+          value={formData}
           ref={c => { this.inputRef = c; }}
           onChange={::this.handleChange}
         />

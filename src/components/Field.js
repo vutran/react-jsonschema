@@ -4,10 +4,10 @@ import { getInputType } from '../utils';
 
 class Field extends Component {
   handleChange(e) {
-    const { schema, propId } = this.props;
+    const { schema, path } = this.props;
     this.props.onChange({
       schema,
-      propId,
+      path,
       value: e.target.value,
     });
   }
@@ -29,14 +29,14 @@ class Field extends Component {
 }
 
 Field.propTypes = {
-  propId: PropTypes.string,
+  path: PropTypes.string,
   schema: PropTypes.object,
   formData: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
     PropTypes.bool,
   ]),
-  onChange: PropTypes.func, // { propId, schema, value }
+  onChange: PropTypes.func, // { path, schema, value }
 };
 
 export default Field;

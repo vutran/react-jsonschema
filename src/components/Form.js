@@ -52,12 +52,12 @@ class Form extends Component {
    * Handles a field change
    *
    * @param {Object} e
-   * @param {String} e.propId
+   * @param {String} e.path
    * @param {String|Number|Boolean} e.value
    */
   handleFieldChange(e) {
     const newState = cloneDeep(this.state);
-    set(newState, e.propId, e.value);
+    set(newState, e.path, e.value);
     this.setState(newState);
   }
 

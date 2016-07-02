@@ -5,10 +5,10 @@ import DeleteButton from './DeleteButton';
 import types from '../constants/types';
 
 class SchemaField extends Component {
-  getFields(propId, schema, formData) {
+  getFields(path, schema, formData) {
     const { onChange, onAddItem, onDeleteItem } = this.props;
     // set the prop id prefix to keep track of it's path
-    const propIdPrefix = propId || 'formData';
+    const pathPrefix = path || 'formData';
     // Recursively generate child SchemaField for each property
     if (schema.type === types.OBJECT) {
       return Object.keys(schema.properties).map((p, i) => {
@@ -17,7 +17,7 @@ class SchemaField extends Component {
         return (
           <SchemaField
             key={i}
-            propId={`${propIdPrefix}.${p}`}
+            path={`${pathPrefix}.${p}`}
             schema={childSchema}
             formData={childFormData}
             onChange={onChange}
@@ -35,14 +35,14 @@ class SchemaField extends Component {
         const handleDeleteItem = () => {
           this.props.onDeleteItem({
             index: i,
-            path: propIdPrefix,
+            path: pathPrefix,
           });
         };
         return (
           <div key={i}>
             <SchemaField
               key={i}
-              propId={`${propIdPrefix}[${i}]`}
+              path={`${pathPrefix}[${i}]`}
               schema={schema.items}
               formData={f}
               onChange={onChange}
@@ -56,7 +56,7 @@ class SchemaField extends Component {
     }
     return (
       <Field
-        propId={propId}
+        path={path}
         schema={schema}
         formData={formData}
         onChange={onChange}
@@ -76,18 +76,18 @@ class SchemaField extends Component {
    * and the current formData.
    */
   handleAddItem() {
-    const { propId, schema } = this.props;
+    const { path, schema } = this.props;
     this.props.onAddItem({
-      path: propId,
+      path,
       schema,
     });
   }
 
   render() {
-    const { propId, schema, formData } = this.props;
+    const { path, schema, formData } = this.props;
     return (
       <div>
-        <div>{this.getFields(propId, schema, formData)}</div>
+        <div>{this.getFields(path, schema, formData)}</div>
         {this.getButtons(schema)}
       </div>
     );
@@ -96,7 +96,7 @@ class SchemaField extends Component {
 
 SchemaField.propTypes = {
   id: PropTypes.string,
-  propId: PropTypes.string,
+  path: PropTypes.string,
   schema: PropTypes.object,
   formData: PropTypes.oneOfType([
     PropTypes.object,
@@ -105,7 +105,7 @@ SchemaField.propTypes = {
     PropTypes.number,
     PropTypes.bool,
   ]),
-  onChange: PropTypes.func, // { propId, schema, value }
+  onChange: PropTypes.func, // { path, schema, value }
   onAddItem: PropTypes.func, // { path, schema }
   onDeleteItem: PropTypes.func, // { index, path }
 };

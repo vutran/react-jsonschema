@@ -1,8 +1,22 @@
 import test from 'ava';
 import types from '../src/constants/types';
 import {
+  getInputType,
   getDefaultState,
 } from '../src/utils';
+
+test('retrieve the input types based on the given schema', t => {
+  const schemaDefault = { type: types.OBJECT };
+  const schemaBoolean = { type: types.BOOLEAN };
+  const schemaInteger = { type: types.INTEGER };
+  const schemaNumber = { type: types.NUMBER };
+  const schemaString = { type: types.STRING };
+  t.is(getInputType(schemaDefault), 'text');
+  t.is(getInputType(schemaBoolean), 'checkbox');
+  t.is(getInputType(schemaNumber), 'number');
+  t.is(getInputType(schemaInteger), 'number');
+  t.is(getInputType(schemaString), 'text');
+});
 
 test('retrieve the default state for an object', t => {
   const schema = {
@@ -10,18 +24,51 @@ test('retrieve the default state for an object', t => {
     type: types.OBJECT,
     properties: {
       prop_1: {
-        title: 'String',
         type: types.STRING,
       },
       prop_2: {
-        title: 'Number',
         type: types.NUMBER,
+      },
+      prop_3: {
+        type: types.INTEGER,
+      },
+      prop_4: {
+        type: types.BOOLEAN,
+      },
+      prop_5: {
+        type: types.NULL,
+      },
+      prop_6: {
+        // default null
+      },
+      prop_7: {
+        type: types.ARRAY,
+        items: {
+          type: types.STRING,
+        },
+      },
+      prop_8: {
+        type: types.ARRAY,
+        items: {
+          type: types.OBJECT,
+          properties: {
+            prop_8_child_1: {
+              type: types.STRING,
+            },
+          },
+        },
       },
     },
   };
   const expected = {
     prop_1: '',
     prop_2: 0,
+    prop_3: 0,
+    prop_4: false,
+    prop_5: null,
+    prop_6: null,
+    prop_7: [''],
+    prop_8: [{ prop_8_child_1: '' }],
   };
   t.deepEqual(getDefaultState(schema), expected);
 });

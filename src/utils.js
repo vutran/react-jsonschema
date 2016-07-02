@@ -49,7 +49,7 @@ export function getDefaultState(schema, formData) {
       return c;
     }
     case types.ARRAY:
-      return formData || schema.default || [''];
+      return formData || schema.default || [getDefaultState(schema.items)];
     case types.STRING:
       return formData || schema.default || '';
     case types.BOOLEAN:

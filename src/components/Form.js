@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import SubmitButton from './SubmitButton';
+import RaisedButton from 'material-ui/RaisedButton';
 import SchemaField from './SchemaField';
 import { cloneDeep, set } from 'lodash';
 import { getDefaultState } from '../utils';
@@ -102,7 +102,7 @@ class Form extends Component {
           onAddItem={::this.handleAddItem}
           onDeleteItem={::this.handleDeleteItem}
         />
-        <SubmitButton>Submit</SubmitButton>
+        <RaisedButton label="Submit" />
       </form>
     );
   }

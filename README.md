@@ -6,13 +6,18 @@
 ## Installation
 
 ````bash
-$ npm install --save material-ui react-jsonschema
+$ npm install --save material-ui react-tap-event-plugin react-jsonschema
 ````
 
 ## Usage
 
 ````js
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 import Form from 'react-jsonschema';
+
+// http://www.material-ui.com/#/get-started/installation
+injectTapEventPlugin();
 
 const schema = {
   "title": "Basic Demo",
@@ -37,21 +42,23 @@ const schema = {
 const formData = {
   firstName: '',
   lastName: '',
-  age: 0,
+  age: '',
 };
 
 
 ReactDOM.render(
-  <Form
-    schema={schema}
-    formData={formData}
-    onError={errors => {
-      console.log(errors);
-    }}
-    onSubmit={data => {
-      console.log(data);
-    }}
-  />,
+  <MuiThemeProvider>
+    <Form
+      schema={schema}
+      formData={formData}
+      onError={errors => {
+        console.log(errors);
+      }}
+      onSubmit={data => {
+        console.log(data);
+      }}
+    />
+  </MuiThemeProvider>,
   document.getElementById('app'),
 );
 ````

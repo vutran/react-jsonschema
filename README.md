@@ -1,6 +1,7 @@
 # React JSONSchema
 
 > Create beautiful forms with [JSONSchema](http://json-schema.org) and [Material UI](http://material-ui.com).
+> Inspired by [react-jsonschema-form](https://github.com/mozilla-services/react-jsonschema-form) from Mozilla.
 
 ## Usage
 

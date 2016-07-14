@@ -1,13 +1,10 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import test from 'ava';
-import sinon from 'sinon';
-import { jsdom } from 'jsdom';
 
 import types from '../../src/constants/types';
 import Form from '../../src/components/Form';
 import SchemaField from '../../src/components/SchemaField';
-import SubmitButton from '../../src/components/SubmitButton';
 
 test('renders a <Form /> component', t => {
   const schema = {
@@ -33,6 +30,5 @@ test('renders a <Form /> component', t => {
   );
   t.true(wrapper.find('form').length >= 1);
   t.true(wrapper.find(SchemaField).length >= 1);
-  t.is(wrapper.find(SubmitButton).length, 1);
   t.deepEqual(wrapper.state().formData, formData);
 });

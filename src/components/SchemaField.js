@@ -1,7 +1,9 @@
 import React, { Component, PropTypes } from 'react';
+import RaisedButton from 'material-ui/RaisedButton';
+import Divider from 'material-ui/Divider';
+import Subheader from 'material-ui/Subheader';
+import { List, ListItem } from 'material-ui/List';
 import Field from './Field';
-import AddButton from './AddButton';
-import DeleteButton from './DeleteButton';
 import types from '../constants/types';
 
 class SchemaField extends Component {
@@ -27,7 +29,7 @@ class SchemaField extends Component {
         );
       });
     } else if (schema.type === types.ARRAY) {
-      return formData.map((f, i) => {
+      const listItems = formData.map((f, i) => {
         /**
          * Deletes the existing item based on the given schema and
          * pushes an event up the component tree
@@ -39,7 +41,7 @@ class SchemaField extends Component {
           });
         };
         return (
-          <div key={i}>
+          <ListItem key={i}>
             <SchemaField
               key={i}
               path={`${pathPrefix}[${i}]`}
@@ -49,10 +51,18 @@ class SchemaField extends Component {
               onAddItem={onAddItem}
               onDeleteItem={onDeleteItem}
             />
-            <DeleteButton onClick={handleDeleteItem} />
-          </div>
+            <RaisedButton label="Remove" onClick={handleDeleteItem} />
+          </ListItem>
         );
       });
+      return (
+        <div>
+          <Divider />
+          <Subheader>{schema.title}</Subheader>
+          <List>{listItems}</List>
+          {this.getButtons(schema)}
+        </div>
+      );
     }
     return (
       <Field
@@ -66,7 +76,7 @@ class SchemaField extends Component {
 
   getButtons(schema) {
     if (schema.type === types.ARRAY) {
-      return <AddButton onClick={::this.handleAddItem} />;
+      return <RaisedButton label="Add" onClick={::this.handleAddItem} />;
     }
     return null;
   }
@@ -85,10 +95,12 @@ class SchemaField extends Component {
 
   render() {
     const { path, schema, formData } = this.props;
+    const style = {
+      marginBottom: 15,
+    };
     return (
-      <div>
-        <div>{this.getFields(path, schema, formData)}</div>
-        {this.getButtons(schema)}
+      <div style={style}>
+        {this.getFields(path, schema, formData)}
       </div>
     );
   }

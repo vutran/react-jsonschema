@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import SubmitButton from './SubmitButton';
 import SchemaField from './SchemaField';
 import { cloneDeep, set } from 'lodash';
 import { getDefaultState } from '../utils';
@@ -91,7 +90,7 @@ class Form extends Component {
   }
 
   render() {
-    const { schema } = this.props;
+    const { children, schema } = this.props;
     const { formData } = this.state;
     return (
       <form onSubmit={::this.handleSubmit}>
@@ -102,7 +101,7 @@ class Form extends Component {
           onAddItem={::this.handleAddItem}
           onDeleteItem={::this.handleDeleteItem}
         />
-        <SubmitButton>Submit</SubmitButton>
+        {children}
       </form>
     );
   }
@@ -113,6 +112,7 @@ Form.propTypes = {
   formData: PropTypes.object,
   onError: PropTypes.func,
   onSubmit: PropTypes.func,
+  children: PropTypes.any,
 };
 
 export default Form;

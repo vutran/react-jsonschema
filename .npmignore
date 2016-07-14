@@ -1,5 +1,10 @@
 src/
 examples/
+screenshots/
+test/
+.nyc_output/
 .babelrc
-.eslintrc
 .editorconfig
+.eslintrc
+.gitignore
+.npmignore

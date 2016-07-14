@@ -2,7 +2,7 @@
   "name": "react-jsonschema",
   "version": "0.1.0",
   "description": "React forms with JSONSchema",
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "author": {
     "name": "Vu Tran",
     "email": "vu@vu-tran.com",

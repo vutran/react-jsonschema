@@ -34,16 +34,20 @@ const formData = {
   age: 0,
 };
 
-<Form
-  schema={schema}
-  formData={formData}
-  onError={errors => {
-    console.log(errors);
-  }}
-  onSubmit={data => {
-    console.log(data);
-  }}
-/>
+
+ReactDOM.render(
+  <Form
+    schema={schema}
+    formData={formData}
+    onError={errors => {
+      console.log(errors);
+    }}
+    onSubmit={data => {
+      console.log(data);
+    }}
+  />,
+  document.getElementById('app'),
+);
 ````
 
 ## Screenshots

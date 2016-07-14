@@ -1,5 +1,3 @@
-export {
-  Form,
-  Field,
-  RepeatableField,
-} from './components';
+import { Form } from './components';
+
+export default Form;

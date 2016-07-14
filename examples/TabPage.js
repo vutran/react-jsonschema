@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Card, CardTitle, CardText, CardActions } from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
-import { Form } from 'react-jsonschema'; // eslint-disable-line import/no-unresolved
+import Form from 'react-jsonschema'; // eslint-disable-line import/no-unresolved
 
 const log = msg => console.log(msg); // eslint-disable-line no-console
 

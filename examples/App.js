@@ -1,24 +1,80 @@
-import React from 'react';
-import { Form } from 'react-jsonschema'; // eslint-disable-line import/no-unresolved
-import Paper from 'material-ui/Paper';
-import schema from './schema.json';
-import formData from './defaultData.json';
-const log = msg => console.log(msg); // eslint-disable-line no-console
+import React, { Component } from 'react';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+import AppBar from 'material-ui/AppBar';
+import Drawer from 'material-ui/Drawer';
+import Menu from 'material-ui/Menu';
+import MenuItem from 'material-ui/MenuItem';
+import TabPage from './TabPage';
 
-const style = {
-  margin: 20,
-  padding: 20,
-};
+// Schemas/Datasets
+import basicSchema from './schemas/basic.json';
+import basicFormData from './dataset/basic.json';
+import arraysSchema from './schemas/arrays.json';
+import arraysFormData from './dataset/arrays.json';
 
-const App = () => (
-  <Paper style={style}>
-    <Form
-      schema={schema}
-      formData={formData}
-      onError={e => { log(e); }}
-      onSubmit={e => { log(e); }}
-    />
-  </Paper>
-);
+injectTapEventPlugin();
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false,
+      activeTab: 'basic',
+    };
+  }
+
+  /**
+   * @param {object} e
+   * @param {Component} menuItem
+   */
+  handleMenuClick(e, menuItem) {
+    const { value } = menuItem.props;
+    this.setState({
+      activeTab: value,
+    });
+    // closes the drawer
+    this.handleToggleChange(false);
+  }
+
+  /**
+   * @param {Boolean} open
+   */
+  handleToggleChange(open) {
+    this.setState({ open });
+  }
+
+  handleToggle() {
+    this.setState({
+      open: !this.state.open,
+    });
+  }
+
+  render() {
+    const { activeTab } = this.state;
+    return (
+      <div>
+        <AppBar title="React JSONSchema" onLeftIconButtonTouchTap={::this.handleToggle} />
+        <Drawer docked={false} open={this.state.open} onRequestChange={::this.handleToggleChange}>
+          <Menu onItemTouchTap={::this.handleMenuClick}>
+            <MenuItem value={"basic"}>Basic</MenuItem>
+            <MenuItem value={"arrays"}>Arrays</MenuItem>
+          </Menu>
+        </Drawer>
+        <TabPage
+          tab={'basic'}
+          schema={basicSchema}
+          formData={basicFormData}
+          visible={activeTab === 'basic'}
+        />
+        <TabPage
+          tab={'arrays'}
+          schema={arraysSchema}
+          formData={arraysFormData}
+          visible={activeTab === 'arrays'}
+        />
+      </div>
+    );
+  }
+}
 
 export default App;

@@ -6,7 +6,6 @@ import types from '../constants/types';
 
 class Field extends Component {
   getInputField(path, schema, formData) {
-    const { onChange } = this.props;
     switch (schema.type) {
       case types.STRING:
       case types.NUMBER:
@@ -16,7 +15,7 @@ class Field extends Component {
             name={path}
             floatingLabelText={schema.title}
             defaultValue={formData}
-            onChange={onChange}
+            onChange={::this.handleChange}
           />
         );
       }

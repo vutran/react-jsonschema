@@ -1,0 +1,14 @@
+{
+  "title": "Arrays Demo",
+  "type": "object",
+  "properties": {
+    "websites": {
+      "title": "Websites",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "title": "URL"
+      }
+    }
+  }
+}

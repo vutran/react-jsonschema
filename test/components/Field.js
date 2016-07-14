@@ -1,15 +1,14 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import test from 'ava';
 import sinon from 'sinon';
-import { jsdom } from 'jsdom';
 
 import types from '../../src/constants/types';
 import Field from '../../src/components/Field';
 
-test('renders an <input /> component', t => {
+test('renders a <TextField /> component', t => {
   const path = 'formData';
-  const schema = { type: types.STRING };
+  const schema = { title: 'Name', type: types.STRING };
   const formData = 'Vu Tran';
   const wrapper = shallow(
     <Field
@@ -18,30 +17,13 @@ test('renders an <input /> component', t => {
       formData={formData}
     />
   );
-  const inputProps = wrapper.find('input').props();
-  t.is(inputProps.type, 'text');
-  t.is(inputProps.value, formData);
+  const fieldProps = wrapper.find('TextField').props();
+  t.is(fieldProps.name, path);
+  t.is(fieldProps.floatingLabelText, schema.title);
+  t.is(fieldProps.defaultValue, formData);
 });
 
-test('find the ref of a mounted component', t => {
-  global.document = jsdom('<html>');
-  global.window = document.defaultView;
-  const path = 'formData';
-  const schema = { type: types.STRING };
-  const formData = 'Vu Tran';
-  const wrapper = mount(
-    <Field
-      path={path}
-      schema={schema}
-      formData={formData}
-    />
-  );
-  const inputRef = wrapper.find(Field).first().node.inputRef;
-  t.is(inputRef.type, 'text');
-  t.is(inputRef.value, formData);
-});
-
-test('simulates a click event', t => {
+test('simulates a change event', t => {
   const path = 'formData';
   const schema = { type: types.STRING };
   const formData = 'Vu Tran';
@@ -54,7 +36,7 @@ test('simulates a click event', t => {
       onChange={handleChange}
     />
   );
-  wrapper.find('input').simulate('change', {
+  wrapper.find('TextField').simulate('change', {
     target: {
       value: 'Tran, Vu',
     },

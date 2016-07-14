@@ -1,0 +1,19 @@
+{
+  "title": "Basic Demo",
+  "type": "object",
+  "properties": {
+    "firstName": {
+      "type": "string",
+      "title": "First Name"
+    },
+    "lastName": {
+      "type": "string",
+      "title": "Last Name"
+    },
+    "age": {
+      "type": "integer",
+      "title": "Age",
+      "description": "Age in years"
+    }
+  }
+}

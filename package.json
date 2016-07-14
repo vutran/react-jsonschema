@@ -1,6 +1,6 @@
 {
   "name": "react-jsonschema",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "React forms with JSONSchema",
   "main": "lib/index.js",
   "author": {

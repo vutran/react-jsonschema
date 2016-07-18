@@ -13,6 +13,7 @@ class Field extends Component {
         return (
           <TextField
             name={path}
+            fullWidth={true}
             floatingLabelText={schema.title}
             defaultValue={formData}
             onChange={::this.handleChange}

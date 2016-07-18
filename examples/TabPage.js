@@ -43,13 +43,9 @@ export default class TabPage extends Component {
 
   render() {
     const { schema, formData } = this.props;
-    const baseStyle = {
-      margin: 20,
-      padding: 20,
-    };
     return (
       <div style={this.getStyles()}>
-        <Card style={baseStyle}>
+        <Card>
           <CardTitle title={schema.title} />
           <CardText>
             <Form

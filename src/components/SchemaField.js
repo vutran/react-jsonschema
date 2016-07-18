@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
-import Divider from 'material-ui/Divider';
 import Subheader from 'material-ui/Subheader';
+import { Card, CardTitle, CardText, CardActions } from 'material-ui/Card';
 import { List, ListItem } from 'material-ui/List';
 import Field from './Field';
 import types from '../constants/types';
@@ -56,12 +56,15 @@ class SchemaField extends Component {
         );
       });
       return (
-        <div>
-          <Divider />
-          <Subheader>{schema.title}</Subheader>
-          <List>{listItems}</List>
-          {this.getButtons(schema)}
-        </div>
+        <Card>
+          <CardTitle title={schema.title} />
+          <CardText>
+            <List>{listItems}</List>
+          </CardText>
+          <CardActions>
+            {this.getButtons(schema)}
+          </CardActions>
+        </Card>
       );
     }
     return (

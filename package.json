@@ -47,8 +47,8 @@
     "lint": "eslint ./src",
     "compile": "babel ./src -d ./lib",
     "build": "npm run clean && npm run compile",
-    "build-example": "webpack --content-base examples --config examples/webpack.production.config.js",
-    "dev": "webpack-dev-server --content-base examples/ --config examples/webpack.config.js --inline --hot",
+    "build-docs": "webpack --content-base docs --config docs/webpack.production.config.js",
+    "dev": "webpack-dev-server --content-base docs/ --config docs/webpack.config.js --inline --hot",
     "prepublish": "npm run build",
     "test": "nyc ava"
   },

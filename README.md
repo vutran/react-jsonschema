@@ -3,6 +3,8 @@
 > Create beautiful forms with [JSONSchema](http://json-schema.org) and [Material UI](http://material-ui.com).
 > Inspired by [react-jsonschema-form](https://github.com/mozilla-services/react-jsonschema-form) from Mozilla.
 
+![Screenshot 1](screenshots/screenshot1.png)
+
 ## Installation
 
 ````bash
@@ -62,10 +64,6 @@ ReactDOM.render(
   document.getElementById('app'),
 );
 ````
-
-## Screenshots
-
-![Screenshot 1](screenshots/screenshot1.png)
 
 ### Lint
 

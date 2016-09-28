@@ -1,35 +1,11 @@
 
 import React, { Component, PropTypes } from 'react';
-import TextField from 'material-ui/TextField';
-import { getInputType } from '../utils';
-import types from '../constants/types';
+import TextField from './TextField';
 
 class Field extends Component {
-  getInputField(path, schema, formData) {
-    switch (schema.type) {
-      case types.STRING:
-      case types.NUMBER:
-      case types.INTEGER: {
-        return (
-          <TextField
-            name={path}
-            fullWidth={true}
-            floatingLabelText={schema.title}
-            defaultValue={formData}
-            onChange={::this.handleChange}
-          />
-        );
-      }
-      default:
-        return (
-          <input
-            type={getInputType(schema, formData)}
-            value={formData}
-            ref={c => { this.inputRef = c; }}
-            onChange={::this.handleChange}
-          />
-        );
-    }
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(e) {
@@ -44,9 +20,13 @@ class Field extends Component {
   render() {
     const { path, schema, formData } = this.props;
     return (
-      <div>
-        {this.getInputField(path, schema, formData)}
-      </div>
+      <TextField
+        schema={schema}
+        formData={formData}
+        name={path}
+        label={schema.title}
+        onChange={this.handleChange}
+      />
     );
   }
 }

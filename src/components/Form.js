@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import SchemaField from './SchemaField';
 import { cloneDeep, set } from 'lodash';
+import SchemaField from './SchemaField';
 import { getDefaultState } from '../utils';
 import { addValueToState, deleteIndexFromState } from '../reducers';
 
@@ -8,6 +8,10 @@ class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.handleAddItem = this.handleAddItem.bind(this);
+    this.handleDeleteItem = this.handleDeleteItem.bind(this);
+    this.handleFieldChange = this.handleFieldChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentWillMount() {
@@ -93,13 +97,13 @@ class Form extends Component {
     const { children, schema } = this.props;
     const { formData } = this.state;
     return (
-      <form onSubmit={::this.handleSubmit}>
+      <form onSubmit={this.handleSubmit}>
         <SchemaField
           schema={schema}
           formData={formData}
-          onChange={::this.handleFieldChange}
-          onAddItem={::this.handleAddItem}
-          onDeleteItem={::this.handleDeleteItem}
+          onChange={this.handleFieldChange}
+          onAddItem={this.handleAddItem}
+          onDeleteItem={this.handleDeleteItem}
         />
         {children}
       </form>

@@ -1,0 +1,50 @@
+exports[`test should render a <Form /> component 1`] = `
+<form
+  onSubmit={[Function bound handleSubmit]}>
+  <div
+    style={
+      Object {
+        "marginBottom": 15
+      }
+    }>
+    <div
+      style={
+        Object {
+          "marginBottom": 15
+        }
+      }>
+      <div
+        data-css-11itiwh="">
+        <label
+          data-css-1ap3y28=""
+          htmlFor="formData.firstName" />
+        <input
+          data-css-18xkc9n=""
+          name="formData.firstName"
+          onChange={[Function bound handleChange]}
+          type="text"
+          value="Vu" />
+      </div>
+    </div>
+    <div
+      style={
+        Object {
+          "marginBottom": 15
+        }
+      }>
+      <div
+        data-css-11itiwh="">
+        <label
+          data-css-1ap3y28=""
+          htmlFor="formData.lastName" />
+        <input
+          data-css-18xkc9n=""
+          name="formData.lastName"
+          onChange={[Function bound handleChange]}
+          type="text"
+          value="Tran" />
+      </div>
+    </div>
+  </div>
+</form>
+`;

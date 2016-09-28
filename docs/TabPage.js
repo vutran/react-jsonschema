@@ -1,3 +1,5 @@
+/* eslint-disable import/no-extraneous-dependencies */
+
 import React, { Component, PropTypes } from 'react';
 import { Card, CardTitle, CardText, CardActions } from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -6,6 +8,13 @@ import Form from 'react-jsonschema'; // eslint-disable-line import/no-unresolved
 const log = msg => console.log(msg); // eslint-disable-line no-console
 
 export default class TabPage extends Component {
+  constructor(props) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleError = this.handleError.bind(this);
+    this.handleSubmitButton = this.handleSubmitButton.bind(this);
+  }
+
   /**
    * Retrieve the style
    *
@@ -51,14 +60,13 @@ export default class TabPage extends Component {
             <Form
               schema={schema}
               formData={formData}
-              onError={::this.handleError}
-              onSubmit={::this.handleSubmit}
-              ref={f => { this.f = f }}
-            >
-            </Form>
+              onError={this.handleError}
+              onSubmit={this.handleSubmit}
+              ref={(f) => { this.f = f; }}
+            />
           </CardText>
           <CardActions>
-            <RaisedButton label="Submit" onClick={::this.handleSubmitButton} />
+            <RaisedButton label="Submit" onClick={this.handleSubmitButton} />
           </CardActions>
         </Card>
       </div>

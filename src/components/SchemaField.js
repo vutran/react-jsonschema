@@ -1,12 +1,44 @@
 import React, { Component, PropTypes } from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
-import Subheader from 'material-ui/Subheader';
-import { Card, CardTitle, CardText, CardActions } from 'material-ui/Card';
-import { List, ListItem } from 'material-ui/List';
+import { style } from 'glamor';
 import Field from './Field';
 import types from '../constants/types';
 
+const olStyle = style({
+  margin: 0,
+  padding: 15,
+  boxSizing: 'border-box',
+});
+
+const liStyle = style({
+  listStyleType: 'none',
+  margin: 15,
+  boxSizing: 'border-box',
+});
+
+const btnStyle = style({
+  border: 1,
+  borderRadius: 2,
+  boxSizing: 'border-box',
+  backgroundColor: '#fff',
+  fontWeight: 500,
+  fontSize: 14,
+  padding: 0,
+  margin: 0,
+  outline: 0,
+  height: 36,
+  lineHeight: '36px',
+  textAlign: 'center',
+  textTransform: 'uppercase',
+  boxShadow: 'rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px',
+  minWidth: 88,
+});
+
 class SchemaField extends Component {
+  constructor(props) {
+    super(props);
+    this.handleAddItem = this.handleAddItem.bind(this);
+  }
+
   getFields(path, schema, formData) {
     const { onChange, onAddItem, onDeleteItem } = this.props;
     // set the prop id prefix to keep track of it's path
@@ -41,7 +73,7 @@ class SchemaField extends Component {
           });
         };
         return (
-          <ListItem key={i}>
+          <li {...liStyle} key={i}>
             <SchemaField
               key={i}
               path={`${pathPrefix}[${i}]`}
@@ -51,20 +83,20 @@ class SchemaField extends Component {
               onAddItem={onAddItem}
               onDeleteItem={onDeleteItem}
             />
-            <RaisedButton label="Remove" onClick={handleDeleteItem} />
-          </ListItem>
+            <button {...btnStyle} onClick={handleDeleteItem}>Remove</button>
+          </li>
         );
       });
       return (
-        <Card>
-          <CardTitle title={schema.title} />
-          <CardText>
-            <List>{listItems}</List>
-          </CardText>
-          <CardActions>
+        <div>
+          <h2>{schema.title}</h2>
+          <div>
+            <ol {...olStyle}>{listItems}</ol>
+          </div>
+          <div>
             {this.getButtons(schema)}
-          </CardActions>
-        </Card>
+          </div>
+        </div>
       );
     }
     return (
@@ -79,7 +111,7 @@ class SchemaField extends Component {
 
   getButtons(schema) {
     if (schema.type === types.ARRAY) {
-      return <RaisedButton label="Add" onClick={::this.handleAddItem} />;
+      return <button {...btnStyle} onClick={this.handleAddItem}>Add</button>;
     }
     return null;
   }

@@ -2,5 +2,5 @@
 *.log
 node_modules/
 lib/
+coverage/
 !docs/lib/
-.nyc_output/

@@ -1,3 +1,5 @@
+/* eslint-disable import/no-extraneous-dependencies */
+
 import React, { Component } from 'react';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import AppBar from 'material-ui/AppBar';
@@ -21,6 +23,9 @@ class App extends Component {
       open: false,
       activeTab: 'basic',
     };
+    this.handleMenuClick = this.handleMenuClick.bind(this);
+    this.handleToggle = this.handleToggle.bind(this);
+    this.handleToggleChange = this.handleToggleChange.bind(this);
   }
 
   /**
@@ -53,11 +58,11 @@ class App extends Component {
     const { activeTab } = this.state;
     return (
       <div>
-        <AppBar title="React JSONSchema" onLeftIconButtonTouchTap={::this.handleToggle} />
-        <Drawer docked={false} open={this.state.open} onRequestChange={::this.handleToggleChange}>
-          <Menu onItemTouchTap={::this.handleMenuClick}>
-            <MenuItem value={"basic"}>Basic</MenuItem>
-            <MenuItem value={"arrays"}>Arrays</MenuItem>
+        <AppBar title="React JSONSchema" onLeftIconButtonTouchTap={this.handleToggle} />
+        <Drawer docked={false} open={this.state.open} onRequestChange={this.handleToggleChange}>
+          <Menu onItemTouchTap={this.handleMenuClick}>
+            <MenuItem value={'basic'}>Basic</MenuItem>
+            <MenuItem value={'arrays'}>Arrays</MenuItem>
           </Menu>
         </Drawer>
         <TabPage

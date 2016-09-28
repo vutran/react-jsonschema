@@ -1,3 +1,6 @@
+/* eslint-disable import/no-extraneous-dependencies */
+/* global document */
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';

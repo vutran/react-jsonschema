@@ -1,24 +1,23 @@
-import test from 'ava';
 import types from '../src/constants/types';
 import {
   getInputType,
   getDefaultState,
 } from '../src/utils';
 
-test('retrieve the input types based on the given schema', t => {
+it('retrieve the input types based on the given schema', () => {
   const schemaDefault = { type: types.OBJECT };
   const schemaBoolean = { type: types.BOOLEAN };
   const schemaInteger = { type: types.INTEGER };
   const schemaNumber = { type: types.NUMBER };
   const schemaString = { type: types.STRING };
-  t.is(getInputType(schemaDefault), 'text');
-  t.is(getInputType(schemaBoolean), 'checkbox');
-  t.is(getInputType(schemaNumber), 'number');
-  t.is(getInputType(schemaInteger), 'number');
-  t.is(getInputType(schemaString), 'text');
+  expect(getInputType(schemaDefault)).toBe('text');
+  expect(getInputType(schemaBoolean)).toBe('checkbox');
+  expect(getInputType(schemaNumber)).toBe('number');
+  expect(getInputType(schemaInteger)).toBe('number');
+  expect(getInputType(schemaString)).toBe('text');
 });
 
-test('retrieve the default state for an object', t => {
+it('retrieve the default state for an object', () => {
   const schema = {
     title: 'Object',
     type: types.OBJECT,
@@ -70,10 +69,10 @@ test('retrieve the default state for an object', t => {
     prop_7: [''],
     prop_8: [{ prop_8_child_1: '' }],
   };
-  t.deepEqual(getDefaultState(schema), expected);
+  expect(getDefaultState(schema)).toEqual(expected);
 });
 
-test('retrieve the default state for an array of strings', t => {
+it('retrieve the default state for an array of strings', () => {
   const schema = {
     title: 'Array',
     type: types.ARRAY,
@@ -82,50 +81,50 @@ test('retrieve the default state for an array of strings', t => {
       type: types.STRING,
     },
   };
-  t.deepEqual(getDefaultState(schema), ['']);
+  expect(getDefaultState(schema)).toEqual(['']);
 });
 
-test('retrieve the default state for a string', t => {
+it('retrieve the default state for a string', () => {
   const schema = {
     title: 'String',
     type: types.STRING,
   };
-  t.is(getDefaultState(schema), '');
+  expect(getDefaultState(schema)).toBe('');
 });
 
-test('retrieve the default state for a boolean', t => {
+it('retrieve the default state for a boolean', () => {
   const schema = {
     title: 'Boolean',
     type: types.BOOLEAN,
   };
-  t.is(getDefaultState(schema), false);
+  expect(getDefaultState(schema)).toBeFalsy();
 });
 
-test('retrieve the default state for a number', t => {
+it('retrieve the default state for a number', () => {
   const schema = {
     title: 'Number',
     type: types.NUMBER,
   };
-  t.is(getDefaultState(schema), 0);
+  expect(getDefaultState(schema)).toBe(0);
 });
 
-test('retrieve the default state for an integer', t => {
+it('retrieve the default state for an integer', () => {
   const schema = {
     title: 'Integer',
     type: types.INTEGER,
   };
-  t.is(getDefaultState(schema), 0);
+  expect(getDefaultState(schema)).toBe(0);
 });
 
-test('retrieve the default state for null', t => {
+it('retrieve the default state for null', () => {
   const schema = {
     title: 'Null',
     type: types.NULL,
   };
-  t.is(getDefaultState(schema), null);
+  expect(getDefaultState(schema)).toBeNull();
 });
 
-test('retrieve the default state for a complex object', t => {
+it('retrieve the default state for a complex object', () => {
   const schema = {
     title: 'Person',
     type: types.OBJECT,
@@ -168,11 +167,11 @@ test('retrieve the default state for a complex object', t => {
       'https://github.com/vutran/',
     ],
   };
-  t.deepEqual(getDefaultState(schema), expected);
+  expect(getDefaultState(schema)).toEqual(expected);
 });
 
 
-test('retrieve the default state for a complex object with populated data', t => {
+it('retrieve the default state for a complex object with populated data', () => {
   const schema = {
     title: 'Person',
     type: types.OBJECT,
@@ -208,5 +207,5 @@ test('retrieve the default state for a complex object with populated data', t =>
       'https://github.com/vutran/',
     ],
   };
-  t.deepEqual(getDefaultState(schema, data), data);
+  expect(getDefaultState(schema, data)).toEqual(data);
 });

@@ -1,12 +1,11 @@
-import React from 'react';
-import { shallow } from 'enzyme';
-import test from 'ava';
+/* eslint-disable import/no-extraneous-dependencies */
 
+import React from 'react';
+import renderer from 'react-test-renderer';
 import types from '../../src/constants/types';
 import Form from '../../src/components/Form';
-import SchemaField from '../../src/components/SchemaField';
 
-test('renders a <Form /> component', t => {
+it('should render a <Form /> component', () => {
   const schema = {
     type: types.OBJECT,
     properties: {
@@ -22,13 +21,12 @@ test('renders a <Form /> component', t => {
     firstName: 'Vu',
     lastName: 'Tran',
   };
-  const wrapper = shallow(
+  const component = renderer.create(
     <Form
       schema={schema}
       formData={formData}
     />
   );
-  t.true(wrapper.find('form').length >= 1);
-  t.true(wrapper.find(SchemaField).length >= 1);
-  t.deepEqual(wrapper.state().formData, formData);
+  const tree = component.toJSON();
+  expect(tree).toMatchSnapshot();
 });

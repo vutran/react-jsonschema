@@ -1,11 +1,10 @@
-import test from 'ava';
 import types from '../src/constants/types';
 import {
   addValueToState,
   deleteIndexFromState,
 } from '../src/reducers';
 
-test('adds a new empty value to a simple array', t => {
+it('adds a new empty value to a simple array', () => {
   const schema = {
     type: types.ARRAY,
     items: {
@@ -29,10 +28,10 @@ test('adds a new empty value to a simple array', t => {
       '',
     ],
   };
-  t.deepEqual(addValueToState(state, action), expected);
+  expect(addValueToState(state, action)).toEqual(expected);
 });
 
-test('adds a new empty value to a complex array', t => {
+it('adds a new empty value to a complex array', () => {
   const schema = {
     type: types.ARRAY,
     items: {
@@ -71,10 +70,10 @@ test('adds a new empty value to a complex array', t => {
       },
     ],
   };
-  t.deepEqual(addValueToState(state, action), expected);
+  expect(addValueToState(state, action)).toEqual(expected);
 });
 
-test('delete a value from an array in the state', t => {
+it('delete a value from an array in the state', () => {
   const state = {
     formData: {
       websites: [
@@ -98,5 +97,5 @@ test('delete a value from an array in the state', t => {
       ],
     },
   };
-  t.deepEqual(deleteIndexFromState(state, action), expected);
+  expect(deleteIndexFromState(state, action)).toEqual(expected);
 });

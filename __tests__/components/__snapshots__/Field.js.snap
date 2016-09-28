@@ -1,0 +1,16 @@
+exports[`<Field /> should render a <Field /> component 1`] = `
+<div
+  data-css-11itiwh="">
+  <label
+    data-css-1ap3y28=""
+    htmlFor="formData">
+    Name
+  </label>
+  <input
+    data-css-18xkc9n=""
+    name="formData"
+    onChange={[Function bound handleChange]}
+    type="text"
+    value="Vu Tran" />
+</div>
+`;

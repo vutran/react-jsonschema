@@ -44,7 +44,6 @@ const formData = {
   age: '',
 };
 
-
 ReactDOM.render(
   <Form
     schema={schema}
@@ -60,23 +59,23 @@ ReactDOM.render(
 );
 ````
 
-### Lint
+## Contributing
 
-````bash
-$ npm run lint
-````
+1. Clone the repository
+2. Install dependencies
 
-### Dev
+  **With `npm`:**
 
-````bash
-$ npm run dev
-````
+  ```bash
+  $ npm install
+  ```
 
-### Build
+  **With [`yarn`](https://github.com/yarnpkg/yarn):**
 
-````bash
-$ npm run build
-````
+  ```bash
+  $ yarn
+  ```
+3. Run tests: `npm t`
 
 ## References
 

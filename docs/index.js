@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 /* global document */
 
 import React from 'react';

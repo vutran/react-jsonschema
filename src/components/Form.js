@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { cloneDeep, set } from 'lodash';
 import SchemaField from './SchemaField';
 import { getDefaultState } from '../utils';

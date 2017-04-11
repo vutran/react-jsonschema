@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { style } from 'glamor';
 import Field from './Field';
 import types from '../constants/types';

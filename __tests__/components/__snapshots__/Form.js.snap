@@ -19,14 +19,14 @@ exports[`should render a <Form /> component 1`] = `
       }
     >
       <div
-        data-css-11itiwh=""
+        data-css-vbwgzr=""
       >
         <label
-          data-css-1ap3y28=""
+          data-css-1luuo4y=""
           htmlFor="formData.firstName"
         />
         <input
-          data-css-18xkc9n=""
+          data-css-14dfslc=""
           name="formData.firstName"
           onChange={[Function]}
           type="text"
@@ -42,14 +42,14 @@ exports[`should render a <Form /> component 1`] = `
       }
     >
       <div
-        data-css-11itiwh=""
+        data-css-vbwgzr=""
       >
         <label
-          data-css-1ap3y28=""
+          data-css-1luuo4y=""
           htmlFor="formData.lastName"
         />
         <input
-          data-css-18xkc9n=""
+          data-css-14dfslc=""
           name="formData.lastName"
           onChange={[Function]}
           type="text"

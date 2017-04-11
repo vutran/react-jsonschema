@@ -1,5 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
-
 const webpack = require('webpack');
 const clone = require('clone');
 const baseConfig = require('./webpack.config');

@@ -1,48 +1,60 @@
-exports[`test should render a <Form /> component 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render a <Form /> component 1`] = `
 <form
-  onSubmit={[Function bound handleSubmit]}>
+  onSubmit={[Function]}
+>
   <div
     style={
       Object {
-        "marginBottom": 15
+        "marginBottom": 15,
       }
-    }>
+    }
+  >
     <div
       style={
         Object {
-          "marginBottom": 15
+          "marginBottom": 15,
         }
-      }>
+      }
+    >
       <div
-        data-css-11itiwh="">
+        data-css-11itiwh=""
+      >
         <label
           data-css-1ap3y28=""
-          htmlFor="formData.firstName" />
+          htmlFor="formData.firstName"
+        />
         <input
           data-css-18xkc9n=""
           name="formData.firstName"
-          onChange={[Function bound handleChange]}
+          onChange={[Function]}
           type="text"
-          value="Vu" />
+          value="Vu"
+        />
       </div>
     </div>
     <div
       style={
         Object {
-          "marginBottom": 15
+          "marginBottom": 15,
         }
-      }>
+      }
+    >
       <div
-        data-css-11itiwh="">
+        data-css-11itiwh=""
+      >
         <label
           data-css-1ap3y28=""
-          htmlFor="formData.lastName" />
+          htmlFor="formData.lastName"
+        />
         <input
           data-css-18xkc9n=""
           name="formData.lastName"
-          onChange={[Function bound handleChange]}
+          onChange={[Function]}
           type="text"
-          value="Tran" />
+          value="Tran"
+        />
       </div>
     </div>
   </div>

@@ -12,17 +12,17 @@ import { getDefaultState } from './utils';
  * @return {Array} The new state
  */
 export function addValueToState(state, action) {
-  const newState = cloneDeep(state);
-  const newArray = result(newState, action.path);
-  switch (action.schema.type) {
-    case types.ARRAY:
-      newArray.push(getDefaultState(action.schema.items));
-      break;
-    default:
-      // do nothing
-  }
-  set(newState, action.path, newArray);
-  return newState;
+    const newState = cloneDeep(state);
+    const newArray = result(newState, action.path);
+    switch (action.schema.type) {
+        case types.ARRAY:
+            newArray.push(getDefaultState(action.schema.items));
+            break;
+        default:
+        // do nothing
+    }
+    set(newState, action.path, newArray);
+    return newState;
 }
 
 /**
@@ -36,12 +36,12 @@ export function addValueToState(state, action) {
  * @return {Object} The new state
  */
 export function deleteIndexFromState(state, action) {
-  const newState = cloneDeep(state);
-  const values = result(newState, action.path);
-  const newArray = [
-    ...values.slice(0, action.index),
-    ...values.slice(action.index + 1),
-  ];
-  set(newState, action.path, newArray);
-  return newState;
+    const newState = cloneDeep(state);
+    const values = result(newState, action.path);
+    const newArray = [
+        ...values.slice(0, action.index),
+        ...values.slice(action.index + 1),
+    ];
+    set(newState, action.path, newArray);
+    return newState;
 }

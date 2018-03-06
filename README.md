@@ -81,6 +81,10 @@ ReactDOM.render(
 
 - [JSON Schema](http://json-schema.org/)
 
+## Support
+
+Like what you see? [Become a Patron](https://www.patreon.com/vutran) and support me via a monthly donation.
+
 ## License
 
 MIT © [Vu Tran](https://github.com/vutran/)
